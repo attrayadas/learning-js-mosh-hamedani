@@ -131,3 +131,169 @@ function square(number){
 
 console.log(square(2)); // 4
 ```
+
+## Operators
+### 1. JavaScript Operators
+- We use operators along with our variables and constants to create expressions. And using these expressions we can implement logic and algorithms.
+- We have different types of operators in JS:
+	1. Arithmetic
+	2. Assignment
+	3. Comparison
+	4. Logical
+	5. Bitwise
+
+### 2. Arithmetic Operators
+```
+let x = 10;
+let y = 3;
+
+console.log(x + y); // 13
+console.log(x - y); // 7
+console.log(x * y); // 30
+console.log(x / y); // 3.3333333333333335
+console.log(x % y); // 1
+console.log(x ** y); // x to the power y -> 1000
+
+// Increment (++)
+console.log(x++); // 10
+console.log(x); // 11
+
+// Decrement (--)
+console.log(--y); // 2
+```
+
+### 3. Assignment Operators
+```
+let x = 10;
+
+// Both are same
+x++;
+x = x + 1;
+
+// Both are same
+x = x + 5;
+x += 5;
+
+// Both are same
+x = x * 3;
+x *= 3;
+```
+
+### 4. Comparison Operators
+```
+let x = 1;
+
+// Relational
+console.log(x > 0); // true
+console.log(x >= 0); // true
+console.log(x < 1); // false
+console.log(x <= 1); // true
+
+// Equality
+console.log(x === 1); // true
+console.log(x !== 1); // false
+```
+
+### 5. Equality Operators
+- The strict equality operator ensures that both values have the same type and the same value.
+- The loose equality operator doesn't care about the types matching, if the types don't match, it will convert the type of what we have on the right side to match what we have on the left side. And then it will only check if the values are equal.
+- We should use String Equality as it's more precise and accurate
+```
+// Strict Equality (Type + Value)
+console.log(1 === 1); // true
+console.log(1 === '1'); // false
+
+// Lose Equality (Value)
+console.log(1 == 1); // true
+console.log(1 == '1'); // true
+console.log(1 == true); // true
+console.log(0 == false); // true
+```
+
+### 6. Ternary Operators
+```
+// If a customer has more than 100 points,
+// they are a 'gold' customer, otherwise,
+// they are a 'silver' customer.
+
+let points = 110;
+let type = points > 100 ? 'gold' : 'silver';
+
+console.log(type); // gold
+```
+
+### 7. Logical Operators with Booleans
+```
+// Logical AND (&&)
+// Returns TRUE if both operands are TRUE
+console.log(true && false); // false
+
+let highIncome = true;
+let goodCreditScore = true;
+let eligibleForLoan = highIncome && goodCreditScore;
+
+console.log(eligibleForLoan); // true  
+
+// Logical OR (||)
+// Returns TRUE if one of the operands is TRUE
+console.log(true || false); // true
+
+// NOT (!)
+console.log(!true); // false
+```
+
+### 8. Logical Operators with Non-Booleans
+- Falsy Values (false):
+1. undefined
+2. null
+3. 0
+4. false
+5. ''
+6. NaN
+- Anuthing that is not Falsy, it is Truthy 
+```
+console.log(false || true); // true
+console.log(false || 'Attraya'); // Attraya
+console.log(false || 1); // 1
+console.log (false || 1 || 2); // 1 // Short-circuiting: It dosen't check for the third position
+
+// Real time usecase
+let userColor = '';
+let defaultColor = 'blue';
+let currentColor = userColor || defaultColor;
+console.log(currentColor); // blue
+```
+
+### 9. BitWise Operators
+```
+// 1 -> 00000001
+// 2 -> 00000010
+// R -> 00000011 // OR
+// R -> 00000000 // AND
+
+console.log(1 | 2); // Bitwise OR -> 3
+console.log(1 & 2); // Bitwise AND -> 0
+```
+
+### 10. Operator Precedence
+- We can use brackets to determine the precedence
+```
+let x = 2 + 3 * 4;
+let y = (2 + 3) * 4;
+
+console.log(x); // 14
+console.log(y); // 20
+```
+
+### 11. Swapping Variables
+```
+let a = 'red';
+let b = 'blue';
+
+let c = b;
+b = a;
+a = c;
+
+console.log(a);
+console.log(b);
+```
