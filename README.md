@@ -297,3 +297,382 @@ a = c;
 console.log(a);
 console.log(b);
 ```
+
+## Control Flow
+### 1. if...else
+- Types of Conditional Statements:
+1. if...else
+2. switch...case
+```
+// Hour
+// If hour is between 6am and 12pm: Good morning!
+// If it is between 12pm and 6pm: Good afternoon!
+// Otherwise: Good evening!
+
+let hour = 10;
+  
+if (hour >= 6 && hour < 12)
+	console.log("Good Morning!");
+else if(hour >= 12 && hour < 18)
+	console.log("Good Afternoon");
+else
+	console.log("Good Evening");
+```
+
+### 2. Switch...case
+```
+let role = 'Moderator';
+
+switch(role){
+	case 'guest':
+		console.log('Guest User');
+		break;
+	case 'moderator':
+		console.log('Moderator User');
+		break;
+	default:
+		console.log('Unknown User');
+}
+```
+
+### 3. For
+- Types of Loops:
+1. For
+2. While
+3. Do...while
+4. For...in
+5. For...of
+```
+for (let i = 0; i < 5; i++){
+	console.log('Hello World ', i);
+} 
+
+for (let i = 0; i < 5; i++){
+	if (i % 2 === 0){
+		console.log(i);
+	}
+}
+```
+
+### 4. While
+```
+let i = 0;
+while(i <= 5){
+	if (i % 2 !== 0) console.log(i);
+	i++;
+}
+```
+
+### 5. Do...While
+```
+let i = 9;
+
+do{
+	if (i % 2 !== 0) console.log(i);
+	i++;
+} while(i <= 5);
+```
+
+### 6. Infinite Loop
+```
+let i = 5;
+while (i < 7){
+	console.log(i);
+	i++;
+}
+
+while(true){
+
+}
+
+let x = 0;
+do {
+
+} while (x < 5);
+```
+
+### 7. For...In
+```
+// for-in
+const person = {
+name: 'Attraya',
+age: 30
+};
+
+for (let key in person)
+	console.log(key, person[key]);  
+
+const color = ['red', 'blue', 'green'];
+
+for (let index in color)
+	console.log(color[index]);
+```
+
+### 8. For...of
+```
+// for-of
+const colors = ['red', 'green', 'blue'];
+
+for (let color of colors){
+	console.log(color);
+}
+```
+
+### 9. Break and Continue
+```
+// break: we jump out of a loop
+let i = 0;
+
+while(i<=10){
+	if (i === 5) break;
+	console.log(i); // 0 1 2 3 4
+	i++;
+}
+
+// continue: we continue with the next iteration
+let j = 0;
+
+while(j <= 10){
+	if (j % 2 === 0){
+		j++;
+		continue;
+	}
+	console.log(j);
+	j++;
+}
+```
+
+### 10. Exercise: Max of two numbers
+```
+let number = max(17, 11);
+console.log(number);
+
+function max(a, b){
+	return (a > b) ? a : b;
+}
+```
+
+### 11. Exercise: Landscape or Portrait
+```
+function isLandscape(width, height){
+	return (width > height);
+}
+
+console.log(isLandscape(800, 600)); // true
+```
+
+### 12. Exercise: FizzBuzz
+```
+console.log(fizzbuzz(true));
+
+// Divisible by 3 => Fizz
+// Divisible by 5 => Buzz
+// Divisible by both 3 and 5 => FizzBuzz
+// Not divisible by 3 or 5 => input
+// Not a number => 'Not a number'
+function fizzbuzz(input){
+	if (typeof input !== 'number'){
+		return NaN;
+	}
+	if (input % 3 === 0 && input % 5 === 0){
+		return 'FizzBuzz';
+	} else if (input % 3 === 0){
+		return 'Fizz';
+	} else if (input % 5 === 0){
+		return 'Buzz';
+	} else {
+		return input;
+	}
+}
+```
+
+### 13. Exercise: Demerit Points
+```
+// Speed Limit = 70
+// 5 -> 1 point
+// Math.floor(1.3)
+// 12 points -> suspended
+
+checkSpeed(130);
+
+function checkSpeed(speed){
+	const speedLimit = 70;
+	const kmPerPoint = 5;
+	if (speed < speedLimit + kmPerPoint) {
+		console.log('OK');
+		return;
+	}
+	let points = Math.floor((speed - speedLimit) / kmPerPoint);
+	if (points >= 12) {
+		console.log('License Suspended');
+	} else {
+		console.log('Points: ', points)
+	}
+}
+```
+
+### 14. Exercise: Even and Odd Numbers
+```
+showNumbers(1);
+
+function showNumbers(limit){
+	let i = 0;
+	while (i <= limit){
+		if (i % 2 === 0){
+			console.log(i, 'EVEN');
+		} else {
+			console.log(i, 'ODD');
+		}
+		i++;
+	}
+}
+```
+
+### 15. Exercise: Count Truthy
+```
+const array = [1, 2, 3, 0, '', 2, NaN, 67];
+console.log(countTruthy(array));
+
+// Falsy:
+// undefined
+// null
+// ''
+// false
+// 0
+// NaN
+function countTruthy(array){
+	let count = 0;
+	for (let value of array){
+		if (value){
+			count++;
+		}
+	}
+return count;
+}
+```
+
+### 16. Exercise: String Properties
+```
+const movie = {
+	title: 'a',
+	releaseYear: 2018,
+	rating: 4.5,
+	director: 'b'
+}
+
+showProperties(movie);
+
+function showProperties(obj){
+	for (let key in obj){
+		if (typeof obj[key] === 'string'){
+			console.log(key, obj[key]);
+		}
+	}
+}
+
+// title a
+// director b
+```
+
+### 17. Exercise: Sum of Multiples 3 and 5
+```
+console.log(sum(10));
+
+function sum(limit){
+	let result = 0;
+	for (let i = 0; i <= limit; i++){
+		if (i % 3 === 0 || i % 5 === 0){
+			result += i;
+		}
+	}
+	return result;
+}
+```
+
+### 18. Exercise: Grade
+```
+const marks = [80, 80, 50];
+
+// Average = 70
+
+// 0-59: F
+// 60-69: D
+// 70-79: C
+// 80-89: B
+// 90-100: A
+  
+console.log(calculateGrade(marks));
+
+function calculateGrade(marks){
+
+	let sum = 0;
+	
+	for (let mark of marks){
+		sum += mark;
+	}
+	
+	let average = sum / marks.length;
+
+	if (average <= 59 && average >= 0) return 'F';	
+	else if (average <= 69 && average >= 60) return 'D';
+	else if (average <= 79 && average >= 70) return 'C';
+	else if (average <= 89 && average >= 80) return 'B';
+	else if (average <= 100 && average >= 90) return 'A';
+}
+```
+
+### 19. Exercise: Stars
+```
+showStars(5);
+
+function showStars(rows){
+	for (let row = 1; row <= rows; row++){
+		let pattern = '';
+		for (let i = 0; i < row; i++){
+			pattern += '*';
+		}
+	console.log(pattern);
+	}
+}
+
+// *
+// **
+// ***
+// ****
+// *****
+```
+
+### 20. Exercise: Prime Numbers
+```
+showPrimes(10);
+
+// Prime (whose factors are only 1 and itself)
+// Composite
+  
+// 12 = 1, 2, 3, 4, 6, 12
+// Can be divided evenly by its factor
+
+// 11 = 1, 11
+// 13 = 1, 13
+
+function showPrimes(limit){
+	for (let number = 2; number <= limit; number++){
+		if (isPrime(number)) console.log(number);
+	}
+}
+
+  
+
+function isPrime(number) {
+	let isPrime = true;
+	for (let factor = 2; factor < number; factor++)
+		if (number % factor === 0)
+			return false;
+	return true;
+}
+
+// 2
+// 3
+// 5
+// 7
+```
