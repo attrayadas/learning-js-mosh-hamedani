@@ -676,3 +676,377 @@ function isPrime(number) {
 // 5
 // 7
 ```
+
+## Objects
+### 1. Basics
+- Objects are collection of key-value pairs
+```
+// Object-oriented Programming (OOP)
+const circle = {
+	radius: 1,
+	location: {
+		x: 1,
+		y: 1
+	},
+	isVisible: true,
+	draw: function(){
+		console.log('draw');
+	}
+}
+
+circle.draw();
+```
+
+### 2. Factory Functions
+```
+// Factory Function
+function createCircle(radius){
+	return {	
+		radius,		
+		draw() {
+			console.log('draw');
+		}
+	};
+}
+
+const circle1 = createCircle(1);
+console.log(circle1); // { radius: 1, draw: [Function: draw] }
+
+const circle2 = createCircle(4);
+console.log(circle2); // { radius: 4, draw: [Function: draw] }
+```
+
+### 3. Constructor Functions
+- We need to use Pascal Notation: OneTwoThreeFour
+```
+// Constructor Function
+function Circle(radius){
+	this.radius = radius;
+	this.draw = function(){
+		console.log('draw');
+	}
+}
+
+const circle = new Circle(1);
+console.log(circle);
+```
+
+### 4. Dynamic Nature of Objects
+- Once we create an object, we can always add new properties or methods or remove existing ones.
+```
+const circle = {
+	radius: 1
+};
+
+circle.color = 'blue';
+circle.draw = function(){
+	console.log('draw');
+}
+
+  
+
+delete circle.radius;
+delete circle.draw;
+
+console.log(circle); // { color: 'blue' }
+```
+
+### 5. Constructor Property
+- Every object has a constructor property and that references the function that was used to create an object
+```
+let x = {};
+// Internally it's let x = new Object();
+
+new String(); // '', "", `` -> cleaner and simpler than using constructor
+new Boolean(); // true, false
+new Number(); // 1, 2, 3
+```
+
+### 6. Functions are Objects
+// Need to revisit
+
+### 7. Value vs Reference Types
+- In JavaScript we have two categories of types:
+1. Value Types (primitives): eg- Number, String, Boolean, Symbol, undefined, null
+2. Reference Types (object): eg- Object, Function, Array
+- Primitives are copied by their value
+- Objects are copied by their reference
+```
+// Primitive Types
+let x = 10;
+let y = x;
+
+x = 20;
+
+console.log(x); // 20
+console.log(y); // 10
+
+// Reference Types
+let a = {value : 10}
+let b = a;
+
+a.value = 20;
+
+console.log(a); // 20i
+console.log(b); // 20
+```
+
+### 8. Enumerating Properties of an Object
+- For...of loop can only be used in iterables like arrays and maps
+```
+const circle = {
+	radius: 1,
+	draw() {
+		console.log("draw");
+	},
+};
+
+for (let key in circle) {
+	console.log(key, circle[key]);
+}
+// radius 1
+// draw [Function: draw]
+
+
+// for (let key of circle){ // error: circle is not iterable
+//   console.log(key);
+// }
+
+  
+for (let key of Object.keys(circle)) {
+	console.log(key);
+}
+
+// radius
+// draw
+
+for (let entry of Object.entries(circle)) {
+	console.log(entry);
+}
+// [ 'radius', 1 ]
+// [ 'draw', [Function: draw] ]
+
+if ('radius' in circle) console.log('yes'); // yes
+```
+
+### 9. Cloning an Object
+- We can use `Object.assign(target, source)` to clone object
+```
+const circle = {
+	radius: 1,
+	draw() {
+		console.log('draw');
+	}
+};
+
+// 1st way to clone
+const another = {};
+
+for (let key in circle){
+	another[key] = circle[key];
+}
+// another['radius'] = circle['radius'];
+
+console.log(another); // { radius: 1, draw: [Function: draw] }
+ 
+// 2nd way to clone
+const anotherAnother = Object.assign({}, circle); // can
+console.log(anotherAnother);
+
+// 3rd way to clone
+const anotherAnotherAnother = {...circle};
+console.log(anotherAnotherAnother);
+```
+
+### 10. Garbage Collection
+- Garbage Collector: It is to find the variables or constants that are no longer used and then deallocate the memory
+- Memory allocation and deallocation happens automatically in JavaScript
+
+### 11. Math
+```
+console.log(Math.E);
+console.log(Math.random()); // gives random number between 0 to 1
+console.log(Math.round(1.8)); // 2
+console.log(Math.max(1, 2, 3, 67, 87, 2)); // 87
+console.log(Math.min(1, 2, 3, 54)); // 1
+```
+
+### 12. String
+```
+// String primitive
+const message = 'This is my first message ';
+
+// String object
+const another = new String('hi');
+
+console.log(typeof message); // string
+console.log(typeof another); // object
+
+// JS engine internally wraps primitive with a string object
+
+console.log(message.length); // 24
+console.log(message[0]); // T
+console.log(message.includes('my')); // true
+console.log(message.startsWith('This')); // true
+console.log(message.indexOf('m')); // 8
+console.log(message.replace('first', 'second')); // This is my second message // It dosen't modify the original one
+console.log(message); // This is my first message
+console.log(message.toUpperCase()); // THIS IS MY FIRST MESSAGE
+console.log(message.trim()); // This is my first message
+console.log(message.split(' ')); // [ 'This', 'is', 'my', 'first', 'message', '' ]
+```
+
+### 13. Template Literals
+```
+const another = `Hello
+'there'!`;
+
+console.log(another);
+
+const name = 'Attraya';
+const mail =
+`Hey ${name} ${2 + 3},
+
+Thanks for joining my mailing list!
+
+Regards`;
+
+console.log(mail);
+```
+
+### 14. Date
+```
+const now = new Date();
+const date1 = new Date('May 11 2028 09:00');
+const date2 = new Date(2018, 4, 11, 9); // Month starts with 0, 0 -> January
+
+console.log(now); // 2025-01-04T18:19:30.470Z
+console.log(date1); // 2028-05-11T03:30:00.000Z
+console.log(date2.getDate()); // 11
+```
+
+### 15. Exercise: Address Object
+```
+// street
+// city
+// zipCode
+// showAddress(address)
+
+const address = {
+	street: 'Washington St.',
+	city: 'New York',
+	zipCode: '100076'
+}
+
+function showAddress(address){
+	for (let element in address){
+		console.log(element, address[element]);
+	}
+}
+
+showAddress(address);
+```
+
+### 16. Exercise: Factory and Constructor Function
+```
+// Create object of address using both Factory and Constructor function
+
+// Factory Function
+function createAddress(street, city, zipCode){
+	return {
+		street,
+		city,
+		zipCode
+	};
+}
+
+// Constructor Function
+function Address(street, city, zipCode){
+	this.street = street;
+	this.city = city;
+	this.zipCode = zipCode;
+}
+
+let address1 = createAddress('Gachibowli', 'Hyderabad', '500032');
+console.log(address1); // { street: 'Gachibowli', city: 'Hyderabad', zipCode: '500032' }
+
+let address2 = new Address('Brigade Road', 'Bangalore', '706539');
+console.log(address2);
+// Address {
+// street: 'Brigade Road',
+// city: 'Bangalore',
+// zipCode: '706539'
+// }
+```
+
+### 17. Exercise: Object Equality
+```
+function Address(street, city, zipCode){
+	this.street = street;
+	this.city = city;
+	this.zipCode = zipCode;
+}
+
+let address1 = new Address('a', 'b', 'c');
+let address2 = new Address('a', 'b', 'c');
+
+function areEqual(address1, address2){
+	return address1.street === address2.street && address1.city === address2.city && address1.zipCode === address2.zipCode;
+};
+
+function areSame(address1, address2){
+	return address1 === address2;
+};
+
+console.log(areEqual(address1, address2));
+console.log(areSame(address1, address2));
+```
+
+### 18. Exercise: Blog Post Object
+```
+// title
+// body
+// author
+// views
+// comments
+// (author, body)
+// isLive
+
+const post ={
+	title: 'a',
+	body: 'b',
+	author: 'c',
+	views: 10,
+	comments: [
+		{author: 'a', body: 'b'},
+		{author: 'c', body: 'd'},
+	],
+	isLive: true
+}
+
+console.log(post);
+```
+### 19. Exercise: Constructor Functions
+```
+function Post(title, body, author){
+	this.title = title;
+	this.body = body;
+	this.author = author;
+	this.views = 0;
+	this.comments = [],
+	this.isLive = false
+}
+
+let post = new Post('A', 'B', 'Attraya');
+
+console.log(post);
+```
+
+### 20. Price Range Objects
+```
+let priceRanges = [
+{ label: '$', toolTip: 'Inexpensive', minPerPerson: 0, maxPerPerson: 10 },
+{ label: '$$', toolTip: 'Moderate', minPerPerson: 11, maxPerPerson: 20 },
+{ label: '$$$', toolTip: 'Expensive', minPerPerson: 21, maxPerPerson: 50 },
+];
+```
