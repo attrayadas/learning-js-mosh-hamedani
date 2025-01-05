@@ -1050,3 +1050,415 @@ let priceRanges = [
 { label: '$$$', toolTip: 'Expensive', minPerPerson: 21, maxPerPerson: 50 },
 ];
 ```
+
+## Arrays
+### 1. Introduction
+- We will learn doing these operations on Arrays:
+	1. Adding new elements
+	2. Finding elements
+	3. Removing elements
+	4. Splitting arrays
+	5. Combining arrays
+
+### 2. Adding Elements
+```
+const numbers = [3, 4];
+
+// To add element in the end
+numbers.push(10, 11);
+
+// To add element in the beginning
+numbers.unshift(1, 2);
+
+// To add element in the middle
+numbers.splice(2, 0, 'a', 'b');
+
+console.log(numbers); // [ 1, 2, 'a', 'b', 3, 4, 10, 11 ]
+```
+
+### 3. Finding Elements (Primitives)
+```
+const numbers = [1, 2, 3, 4, 1, 5];
+
+// Returns -1 if element doesn't exists
+console.log(numbers.indexOf('a')); // -1
+
+console.log(numbers.indexOf(1)); // 0
+console.log(numbers.indexOf(1, 2)); // 4 -> search 1, finds from index 2
+
+// Type of element matters
+console.log(numbers.indexOf('1')); // -1
+
+console.log(numbers.lastIndexOf(1)); // 4
+
+// To check if an element exists
+console.log(numbers.indexOf(1) !== -1); // true
+
+// New method to check if element exists
+console.log(numbers.includes(1)); // 1
+```
+
+### 4. Finding Elements (Reference Types)
+```
+const courses = [
+	{ id: 1, name: 'a'},
+	{ id: 2, name: 'b'},
+];
+
+
+// includes method doesn't work here, as it checks for reference
+
+const course = courses.find(function(course) {
+	return course.name === 'b';
+});
+
+const courseNotFound = courses.find(function(course) {
+	return course.name === 'abc';
+});
+
+const courseIndex = courses.findIndex(function(course) {
+	return course.name === 'a';
+});
+
+  
+console.log(course); // { id: 2, name: 'b' }
+console.log(courseNotFound); // undefined -> gives undefined if not found
+console.log(courseIndex); // 0
+```
+
+### 5. Arrow Functions
+```
+const courses = [
+	{ id: 1, name: 'a'},
+	{ id: 2, name: 'b'},
+];
+
+// Old way
+const course = courses.find(function(course) {
+	return course.name === 'b';
+});
+
+// New way (used when we pass function as a parameter)
+const course1 = courses.find(course => course.name === 'a');
+
+console.log(course1); // { id: 1, name: 'a' }
+```
+
+### 6. Removing Elements
+```
+const numbers = [1, 2, 3, 4, 5, 6];
+
+// Removing element from the end
+const last = numbers.pop();
+console.log(last); // 6
+console.log(numbers); // [ 1, 2, 3, 4, 5 ]
+
+// Removing element from the beginning
+const first = numbers.shift();
+console.log(first); // 1
+console.log(numbers); // [ 2, 3 , 4, 5 ]
+
+// Removing element from the middle
+numbers.splice(2, 1);
+console.log(numbers); // [ 2, 3, 5 ]
+```
+
+### 7. Emptying an Array
+```
+// 1st way
+let numbers = [1, 2, 3, 4];
+let another = numbers;
+
+numbers = []; // SECOND BEST SOLUTION
+
+console.log(numbers); // []
+console.log(another); // [ 1, 2, 3, 4 ]
+
+// 2nd way
+let numbers1 = [1, 2, 3, 4];
+numbers1.length = 0; // BEST SOLUTION
+
+console.log(numbers1); // []
+
+// 3rd way
+let numbers2 = [1, 2, 3, 4];
+numbers2.splice(0, numbers2.length);
+  
+console.log(numbers2); // []
+
+// 4th way
+let numbers3 = [1, 2, 3, 4];
+while(numbers3.length >= 0){
+	numbers3.pop();
+}
+
+console.log(numbers3); // []
+```
+
+### 8. Combining and Slicing Arrays
+```
+const first = [1, 2, 3];
+const second = [4, 5, 6];
+
+const combined = first.concat(second); // Both arays are unaffected
+console.log(combined); // [ 1, 2, 3, 4, 5, 6 ]
+
+const sliced = combined.slice(2, 4);
+console.log(sliced); // [3, 4]
+```
+
+### 9. The Spread Operator
+```
+const first = [1, 2, 3];
+const second = [4, 5, 6];
+
+const combined = [...first, ...second];
+const combined2 = [...first, 'a', ...second, 'b'];
+
+console.log(combined); // [ 1, 2, 3, 4, 5, 6 ]
+console.log(combined2); // [ 1, 2, 3, 'a', 4, 5, 6, 'b' ]
+```
+
+### 10. Iterating an array
+```
+const numbers= [1, 2, 3, 4, 5, 6, 7];
+
+for (let number of numbers)
+	console.log(number);
+  
+numbers.forEach(number => console.log(number)); // prints the elements
+
+numbers.forEach((number, index) => console.log(number, index)); // prints the elements and its index
+```
+
+### 11. Joining Arrays
+```
+const numbers = [1, 2, 3];
+let joined = numbers.join('-');
+console.log(joined); // 1-2-3
+
+const message = 'This is my first message';
+let parts = message.split(' ');
+console.log(parts); // [ 'This', 'is', 'my', 'first', 'message' ]
+
+const combined = parts.join('-');
+console.log(combined); // This-is-my-first-message
+```
+
+### 12. Sorting Arrays
+```
+const numbers = [2, 3, 1];
+numbers.sort();
+
+console.log(numbers); // [ 1, 2, 3 ]
+  
+numbers.reverse();
+console.log(numbers); // [ 3, 2, 1 ]
+
+const courses = [
+	{ id: 1, name: 'Node.js'},
+	{ id: 2, name: 'JavaScript'},
+]
+
+courses.sort((a, b) => {
+	// a < b => -1
+	// a > b -> 1
+	// a === b => 0
+	const nameA = a.name.toUpperCase; // required to maintain uniformity
+	const nameB = b.name.toUpperCase;
+	
+	if (nameA.name < nameB.name) return -1;
+	if (nameA.name > nameB.name) return 1;
+	return 0;
+});
+
+console.log(courses); // [ { id: 1, name: 'Node.js' }, { id: 2, name: 'JavaScript' } ]
+```
+
+### 13. Testing the Elements of an Array
+- `every()`: checks to see if every element in a given array matches the given criteria.
+- `some()`: checks to see if we have at least one element that matches the given criteria.
+```
+const numbers = [2, -3, 1];
+
+const allPositive = numbers.every(a => a >= 0); // checks for every element
+console.log(allPositive); // false
+
+const atleastOneNegative = numbers.some(a => a < 0); // checks for any element
+console.log(atleastOneNegative); // true
+```
+
+### 14. Filtering an Array
+```
+const numbers = [2, -3, 1];
+let positiveNum = numbers.filter(number => number >= 0);
+
+console.log(positiveNum);
+```
+
+### 15. Mapping an Array
+```
+const numbers = [2, -3, 1];
+
+let multipleOf5 = numbers.map(num => num * 5);
+
+let items = numbers
+				.filter(n => n >= 0)
+				.map(n => '<li>' + n + '</li>')
+				.join('');
+
+let objectMap = numbers.map(n => ({value : n}) );
+
+console.log(multipleOf5); // [ 10, -15, 5 ]
+console.log(items); // <li>2</li><li>1</li>
+console.log(objectMap); // [ { value: 2 }, { value: -3 }, { value: 1 } ]
+```
+
+### 16. Reducing an Array
+```
+const numbers = [2, -3, 1, 10, 76];
+
+const sum = numbers.reduce((accumulator, currentValue) => {
+	return accumulator + currentValue;
+}, 0);
+
+
+const multiple = numbers.reduce((accumulator, currentValue) => {
+	return accumulator * currentValue;
+}, 1);
+
+console.log(sum); // 86
+console.log(multiple); // -4560
+```
+
+### 17. Exercise: Array from Range
+```
+const numbers = arrayFromRange(-10, 4);
+
+console.log(numbers);  
+
+function arrayFromRange(min, max) {
+	let result = [];
+	for (let i = min; i <= max; i++)
+		result.push(i);
+	return result;
+}
+```
+
+### 18. Exercise: Includes
+```
+const numbers = [1, 2, 3, 4, 34];
+
+function includes(numbers, searchElement) {
+	for (let num of numbers)
+		if (searchElement === num) return true;
+	return false;
+}
+
+console.log(includes(numbers, 34));
+```
+
+### 19. Exercise: Except
+```
+const numbers = [1, 2, 3, 4, 1, 1];
+
+const output = except(numbers, [1, 2]);
+
+console.log(output); // [3, 4]
+
+function except(array, excluded){
+	const output = [];
+	for (let element of array){
+		if (!excluded.includes(element))
+			output.push(element);
+	}
+	return output;
+}
+```
+
+### 20. Exercise: an Element
+```
+const numbers = [1, 2, 3, 4];
+
+const output = move(numbers, 1, 1);
+
+console.log(output);
+
+function move(array, index, offset){
+	const position = index + offset;
+	if (position >= array.length || position < 0) {
+		console.error('Invalid offset...');
+		return;
+	}
+	const output = [...array];
+	const element = output.splice(index, 1)[0];
+	output.splice(position, 0, element);
+	return output;
+}
+```
+
+### 21. Exercise: Count Occurrences
+```
+const numbers = [1, 2, 3, 4, 78, 1, 1, 78];
+
+const count = countOccurrencesV2(numbers, 4);
+
+console.log(count);
+
+// One approach
+function countOccurrences(array, searchElement){
+	let result = 0;
+	for (let elem of array){
+		if (searchElement === elem)
+		result++;
+	}
+	return result;
+}
+
+// Another approach with reduce funtion
+function countOccurrencesV2(array, searchElement){
+	return array.reduce((accumulator, current) => {
+		const occurance = (current === searchElement) ? 1 : 0;
+		return accumulator + occurance;
+	}, 0)
+}
+```
+
+### 22. Exercise: Get Max
+```
+const numbers = [1, 2, 3, 4, 78, 1, 1, 78];
+
+const max = getMaxV2(numbers);  
+
+console.log(max);
+
+function getMax(array){
+	return array.reverse()[0];
+}
+
+function getMaxV2(array){
+	if (array.length === 0) return undefined;
+	return array.reduce((a, b) => (a > b) ? a : b);
+}
+```
+
+### 23. Exercise: Movies
+```
+const movies = [
+	{ title: 'a', year: 2018, rating: 4.5 },
+	{ title: 'b', year: 2018, rating: 4.7 },
+	{ title: 'c', year: 2018, rating: 3 },
+	{ title: 'd', year: 2017, rating: 4.5 },
+]
+
+// All the movies in 2018 with rating > 4
+// Sort them by their rating
+// Descending order
+// Pick their title
+const result = movies
+					.filter(m => m.year === 2018 && m.rating > 4)
+					.sort((a, b) => b.rating - a.rating)
+					.map(m => m.title);
+
+console.log(result);
+```
