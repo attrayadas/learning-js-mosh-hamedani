@@ -1462,3 +1462,5 @@ const result = movies
 
 console.log(result);
 ```
+```
+*Need to revise splice and reduce*
